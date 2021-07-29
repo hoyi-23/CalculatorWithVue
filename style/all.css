@@ -1,0 +1,296 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: '';
+  content: none;
+}
+
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  background-color: #e6e6e6;
+  color: #35352c;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.container {
+  width: 360px;
+  margin: 1rem 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+@media (max-width: 325px) {
+  .container {
+    width: 300px;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: .5rem;
+}
+
+.result__section {
+  background-color: #ededed;
+  border-radius: 10px;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.result__section .process {
+  color: #ca5502;
+  line-height: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+
+.result__section .currentValue {
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: bold;
+}
+
+.history__toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1rem;
+  font-weight: 900;
+  background-color: #ca5502;
+  border-bottom: solid 4px #893901;
+  color: #fff;
+  padding: .25rem .5rem;
+  border-radius: 10px;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.history__toggle:active {
+  border-bottom: solid 2px #a69d91;
+}
+
+.history__title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  padding-bottom: 2rem;
+}
+
+.history__section {
+  padding: 1rem 1.5rem;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #377f86;
+}
+
+.history__close__btn {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+}
+
+.material-icons-outlined {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1b5f65;
+}
+
+.material-icons-outlined:hover {
+  color: #ca5502;
+}
+
+.history__section.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-animation: fill .2s;
+          animation: fill .2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fill {
+  0% {
+    width: 20%;
+  }
+  20% {
+    width: 40%;
+  }
+  60% {
+    width: 60%;
+  }
+  80% {
+    width: 80%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fill {
+  0% {
+    width: 20%;
+  }
+  20% {
+    width: 40%;
+  }
+  60% {
+    width: 60%;
+  }
+  80% {
+    width: 80%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.history__item {
+  border-bottom: solid 1px #1b5f65;
+  padding: 1rem 0rem;
+}
+
+.history__clear__btn {
+  text-align: center;
+  background-color: #ca5502;
+  border-bottom: solid 2px #893901;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 0.5rem 0rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.history__clear__btn:hover {
+  background-color: #893901;
+  border-bottom: solid 2px #ca5502;
+}
+
+.button__section {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d1cccc;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.button__section .button__item {
+  width: 25%;
+}
+
+.button__section .button__item:nth-last-child(1) {
+  width: 50%;
+}
+
+.button__section .button__item:nth-last-child(2) {
+  width: 50%;
+}
+
+.button__section .calculator_btn {
+  margin: .5rem;
+  padding: .75rem 0rem;
+  text-align: center;
+  background-color: #e5e4e1;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-bottom: solid 4px #a69d91;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.button__section .calculator_btn:active {
+  border-bottom: solid 2px #a69d91;
+}
+
+.button__section .calculator_btn_green {
+  background-color: #377f86;
+  border-bottom: solid 4px #1b5f65;
+  color: #fff;
+}
+
+.button__section .calculator_btn_orange {
+  background-color: #ca5502;
+  border-bottom: solid 4px #893901;
+  color: #fff;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Spartan', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  color: #35352c;
+}
+/*# sourceMappingURL=all.css.map */

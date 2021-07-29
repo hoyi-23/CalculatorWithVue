@@ -1,0 +1,12 @@
+@import "reset";
+@import "index";
+@import "button";
+*{
+    box-sizing: border-box;
+    font-family: 'Spartan', sans-serif;
+}
+a{
+    text-decoration: none;
+    display: block;
+    color: $grey;
+}

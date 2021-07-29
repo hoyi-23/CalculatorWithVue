@@ -1,0 +1,43 @@
+.button__section{
+    width: 100%;
+    padding: 1rem;
+    background-color: $primary;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    .button__item{
+        width: 25%;
+    }
+    .button__item:nth-last-child(1){
+        width: 50%;
+    }
+    .button__item:nth-last-child(2){
+        width: 50%;
+    }
+    .calculator_btn{
+        margin: .5rem;
+        padding: .75rem 0rem;
+        text-align: center;
+        background-color: $light;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-bottom: solid 4px $dark;
+        transition: .2s;
+        &:active{
+            border-bottom: solid 2px $dark;
+        }
+    }
+    
+    .calculator_btn_green{
+        background-color: $green;
+        border-bottom:  solid 4px $darkgreen;
+        color: #fff;
+    }
+    .calculator_btn_orange{
+        background-color: $orange;
+        border-bottom:  solid 4px $darkorange;
+        color: #fff;
+    }
+
+}

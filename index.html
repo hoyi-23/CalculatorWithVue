@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="./style/all.css">
+    <title>利用Vue3做一個計算機</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h1 class="title">Calculator</h1>
+      <div class="result__section">
+        <p class="process">{{tmpRecord}}</p>
+        <p class="currentValue">{{currentValue || 0 }}</p>
+      </div>
+        <!--計算元素 用 v-for 跑-->
+      <ul class="button__section">
+        <li class="button__item" v-for="key in calculatorElements" :key="key">
+          <a href="#" @click.prevent="calculate(key)" class="calculator_btn" :class="{calculator_btn_green : ['DEL','RESET'].includes(key)},{calculator_btn_orange : '='.includes(key)}">{{key}}</a> 
+        </li>
+      </ul>
+      <a href="#" @click.prevent="historyToggle" class="history__toggle">History</a>
+      <div  class="history__section" :class="{show : isActived}">
+        <h2 class="history__title">History</h2>
+        <a href="#"class="history__close__btn" @click.prevent="historyToggle"><span class="material-icons-outlined">
+          highlight_off
+          </span></a>
+        <ul>
+          <!--計算紀錄 用 v-for 跑-->
+          <li class="history__item" v-for="key in historyList.slice(0,7)" :key="key">
+            {{key}}
+          </li>
+        </ul>
+        <a href="#" @click.prevent="clearHistory" class="history__clear__btn">Delete History</a>
+      </div>
+          
+        
+    </div>
+
+    <!--引入-->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                  calculatorElements: [7,8,9,'DEL',4,5,6,'+',1,2,3,'-','.',0,'/','x','RESET','='], //所有數字與運算符(由左至右由上至下)
+                  currentValue: '', //目前顯示的數字
+                  previousValue: '', //按下運算子前的數字(總和)
+                  operator: null, //點擊的運算子
+                  previousOperator: null,
+                  tmpRecord: '', //算式紀錄字串，寫
+                  historyList: [], //計算紀錄
+                  isActived: false
+                }
+            },
+            methods: {
+              //點擊數字後觸發calculate(key)
+              calculate(e){
+                //如果觸發的是數字或是'.'，就加入currentValue
+                //NaN : 全名為 Not a Number ，代表不是數字
+                if(!isNaN(e) || e === '.'){
+                  //如果觸發0的同時，currentValue的長度只有1(也就是0是第一個數字)，那'0'不會寫入currentValue(不然會變'00')
+                  if(e === 0 && this.currentValue.length < 1){
+                    this.currentValue = '';
+                  }else if(this.currentValue === '0'){
+                    //如果當時currentValue字串中為一個'0'，那麼接下來的數字不會加在'0'後面，而是直接覆蓋
+                    this.currentValue = e+'';
+                  }else{
+                    this.currentValue += e+'' ;
+                    this.tmpRecord += e+'' ;
+                    console.log(this.tmpRecord)
+                  };
+                }
+                
+                //DEL
+                if(e === 'DEL'){
+                  const str = this.currentValue;
+                  const strLen=this.currentValue.length;
+                  
+                  this.currentValue = str.slice(0,strLen-1);
+                  this.tmpRecord = this.tmpRecord.slice(0,this.tmpRecord.length-1)
+                  console.log(this.tmpRecord);
+                }
+
+                //如果按 +,-,x,/ ，原本的數字要放到previousValue內 
+                if(['+','-','x','/'].includes(e)){
+                  if(!(this.operator===null)){
+                    this.previousOperator = this.operator;
+                    this.operator = null;
+                  }
+                  this.operator = e ;
+                  this.tmpRecord += this.operator ;
+                  console.log(this.tmpRecord)
+                  //如果previousValue有數值，需先與目前的數值做運算
+                  if(!(this.previousValue === '')){
+                    //parseInt(this.currentValue || '0')) 放'0'的原因是為了避免沒有在沒有輸入currentValue前按到運算子。若沒放'0'會出NaN
+                    switch (this.previousOperator){
+                    case '+':
+                      this.previousValue = String(parseInt(this.previousValue) + parseInt(this.currentValue || '0'));
+                    break;
+                    case '-':
+                      this.previousValue = String(parseInt(this.previousValue) - parseInt(this.currentValue || '0'));
+                    break;
+                    case 'x':
+                      this.previousValue = String(parseInt(this.previousValue) * parseInt(this.currentValue || '0'));
+                    break;
+                    case '/':
+                      this.previousValue = String(parseInt(this.previousValue) / parseInt(this.currentValue || '0'));
+                    break;
+                  }
+                  }else{
+                  this.previousValue = this.currentValue;
+                  
+                  }
+                  this.currentValue = '';
+                  
+                }
+                //如果按下'='，this.previousValue + currentValue
+                if(e === '='){
+                  
+                  this.tmpRecord += e ;
+                  switch (this.operator){
+                    case '+':
+                      this.currentValue = String(parseInt(this.previousValue) + parseInt(this.currentValue || '0'));
+                      this.tmpRecord += this.currentValue ;
+                      console.log(this.tmpRecord)
+                    break;
+                    case '-':
+                      this.currentValue = String(parseInt(this.previousValue) - parseInt(this.currentValue || '0'));
+                      this.tmpRecord += this.currentValue ;
+                      console.log(this.tmpRecord)
+                    break;
+                    case 'x':
+                      this.currentValue = String(parseInt(this.previousValue) * parseInt(this.currentValue || '0'));
+                      this.tmpRecord += this.currentValue ;
+                      console.log(this.tmpRecord)
+                    break;
+                    case '/':
+                      this.currentValue = String(parseInt(this.previousValue) / parseInt(this.currentValue || '0'));
+                      this.tmpRecord += this.currentValue ;
+                      console.log(this.tmpRecord)
+                    break;
+                  }
+                  this.previousValue = '';
+                  this.operator = null;
+                  console.log(this.tmpRecord)
+                  localStorage.setItem("operation",this.tmpRecord);
+                  this.historyList.push(localStorage.getItem("operation"))
+                }
+                //按下RESET，全部清空
+                if(e === 'RESET'){
+                  this.currentValue = '';
+                  this.previousValue = '';
+                  this.operator = null;
+                  
+                  this.tmpRecord='';
+                  
+                }
+              },
+              historyToggle(e){
+                this.isActived = !this.isActived;
+              },
+              clearHistory(e){
+                localStorage.clear();
+                this.historyList = [];
+                console.log(this.historyList)
+              }
+            },
+        });
+      
+        vm.mount('#app');
+    </script>
+  </body>
+</html>
