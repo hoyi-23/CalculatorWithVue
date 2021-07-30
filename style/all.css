@@ -53,7 +53,7 @@ body {
 
 .container {
   width: 360px;
-  margin: 1rem 1rem;
+  margin: 1rem 0rem;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -102,6 +102,59 @@ body {
   font-size: 2rem;
   line-height: 3rem;
   font-weight: bold;
+}
+
+.button__section {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d1cccc;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.button__section .button__item {
+  width: 25%;
+}
+
+.button__section .button__item:nth-last-child(1) {
+  width: 50%;
+}
+
+.button__section .button__item:nth-last-child(2) {
+  width: 50%;
+}
+
+.button__section .calculator_btn {
+  margin: .5rem;
+  padding: .75rem 0rem;
+  text-align: center;
+  background-color: #e5e4e1;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-bottom: solid 4px #a69d91;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.button__section .calculator_btn:active {
+  border-bottom: solid 2px #a69d91;
+}
+
+.button__section .calculator_btn_green {
+  background-color: #377f86;
+  border-bottom: solid 4px #1b5f65;
+  color: #fff;
+}
+
+.button__section .calculator_btn_orange {
+  background-color: #ca5502;
+  border-bottom: solid 4px #893901;
+  color: #fff;
 }
 
 .history__toggle {
@@ -227,59 +280,6 @@ body {
 .history__clear__btn:hover {
   background-color: #893901;
   border-bottom: solid 2px #ca5502;
-}
-
-.button__section {
-  width: 100%;
-  padding: 1rem;
-  background-color: #d1cccc;
-  border-radius: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.button__section .button__item {
-  width: 25%;
-}
-
-.button__section .button__item:nth-last-child(1) {
-  width: 50%;
-}
-
-.button__section .button__item:nth-last-child(2) {
-  width: 50%;
-}
-
-.button__section .calculator_btn {
-  margin: .5rem;
-  padding: .75rem 0rem;
-  text-align: center;
-  background-color: #e5e4e1;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  border-bottom: solid 4px #a69d91;
-  -webkit-transition: .2s;
-  transition: .2s;
-}
-
-.button__section .calculator_btn:active {
-  border-bottom: solid 2px #a69d91;
-}
-
-.button__section .calculator_btn_green {
-  background-color: #377f86;
-  border-bottom: solid 4px #1b5f65;
-  color: #fff;
-}
-
-.button__section .calculator_btn_orange {
-  background-color: #ca5502;
-  border-bottom: solid 4px #893901;
-  color: #fff;
 }
 
 * {
